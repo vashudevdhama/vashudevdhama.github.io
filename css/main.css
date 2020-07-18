@@ -91,18 +91,18 @@ a.contact {
   padding: 1% 2%;
 }
 h2 {
-  margin-bottom: 2px;
+  margin-bottom: 4px;
 }
 h3 {
   margin-bottom: 0;
 }
 h4 {
   margin-bottom: 0;
-  font-size: 1.3em;
+  font-size: 1.4em;
 }
 ul.skills {
   list-style-position: inside;
-  margin-bottom: 2em;
+  margin-bottom: 2.1em;
   padding: 0;
 }
 li {
@@ -113,5 +113,11 @@ li {
   color: #5ef5da;
 }
 .degree h4 {
-  margin-top: 5px;
+  margin-top: 7px;
+}
+p {
+  font-size: 22px;
+}
+.project-desc {
+  font-size: 22px;
 }
