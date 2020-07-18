@@ -5,158 +5,176 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vashudev Dhama</title>
     <link rel="stylesheet" href="./css/main.css" />
+    <script src="./js/main.js"></script>
   </head>
   <body>
+    <div id="clickme">
+      <div class="center">
+        <h1>Hi I'm Vashudev...</h1>
+        <button onclick="showPage()">Click to know more about me</button>
+      </div>
+    </div>
     <!-- Top navbar -->
-    <header>
-      <nav class="navbar">
-        <a
-          href="https://drive.google.com/file/d/1bvCNcOcHbOtiPsSTawXTTJKPp7qNRYbQ/view"
-          class="resume link"
-          >Resume</a
-        >
-      </nav>
-    </header>
-    <!-- Main body -->
-    <main>
-      <!-- main-left -->
-      <div class="main-left">
-        <!-- profile-image -->
-        <img
-          src="./assets/img/vashu.png"
-          alt="Profile Image"
-          class="profile-image"
-        />
-        <!-- greet-name -->
-        <h3 class="greet" style="color: #5ef5da;">Hi, My name is</h3>
-        <h1 class="name">Vashudev Dhama</h1>
-        <!-- user-desc -->
-        <p class="user-desc">
-          I am a final year student at Krishna Institute of Engineering and
-          Technology, Ghaziabad pursuing engineering in Information Technology.
-          I have worked on designing, developing and implementing various
-          software projects using Flutter, Python and Unity3D.
-        </p>
-        <!-- profile-links -->
-        <h4 class="profile-links">Find me on:</h4>
-        <ul class="skills">
-          <li class="github">
-            <a class="link" href="https://github.com/vashudevdhama"
-              >&#9758; Github</a
-            >
-          </li>
-          <li class="linkedin">
-            <a class="link" href="https://linkedin.com/in/vashudevdhama"
-              >&#9758; LinkedIn</a
-            >
-          </li>
-        </ul>
-        <!-- contact -->
-        <a class="contact link" href="mailto:dhamavashudev@gmail.com"
-          >Get in Touch!</a
-        >
-      </div>
-      <!-- main-left -->
-      <!-- main-right -->
-      <div class="main-right">
-        <!-- education -->
-        <div class="education">
-          <div class="edu-head">
-            <h2 style="color: #5ef5da;">Education:</h2>
-          </div>
-          <!-- tiles -->
-          <div class="tiles">
-            <!-- tile -->
-            <div class="tile">
-              <div class="college"><h2>KIET Group of Institutions</h2></div>
-              <div class="degree"><h4>Bachelor of Technology (IT)</h4></div>
-              <div class="year">Year: 2016-2020</div>
-              <div class="percentage">Percentage: 82%</div>
-            </div>
-            <!-- tile -->
-            <div class="tile">
-              <div class="college"><h2>Vanasthali Public School</h2></div>
-              <div class="degree">
-                <h4>Central Board of Secondary Education</h4>
-              </div>
-              <div class="year">Year of passing: 2015</div>
-              <div class="percentage">Percentage: 82.2%</div>
-            </div>
-          </div>
-          <!-- tiles -->
+    <div id="main">
+      <header>
+        <nav class="navbar">
+          <a
+            href="https://drive.google.com/file/d/1bvCNcOcHbOtiPsSTawXTTJKPp7qNRYbQ/view"
+            class="resume link"
+            target="_blank"
+            >Resume</a
+          >
+        </nav>
+      </header>
+      <!-- Main body -->
+      <main>
+        <!-- main-left -->
+        <div class="main-left">
+          <!-- profile-image -->
+          <img
+            src="./assets/img/vashu.png"
+            alt="Profile Image"
+            class="profile-image"
+          />
+          <!-- greet-name -->
+          <h3 class="greet" style="color: #5ef5da;">Hi, My name is</h3>
+          <h1 class="name">Vashudev Dhama</h1>
+          <!-- user-desc -->
+          <p class="user-desc">
+            I am a final year student at Krishna Institute of Engineering and
+            Technology, Ghaziabad pursuing engineering in Information
+            Technology. I have worked on designing, developing and implementing
+            various software projects using Flutter, Python and Unity3D.
+          </p>
+          <!-- profile-links -->
+          <h4 class="profile-links">Find me on:</h4>
+          <ul class="skills">
+            <li class="github">
+              <a
+                class="link"
+                href="https://github.com/vashudevdhama"
+                target="_blank"
+                >&#9758; Github</a
+              >
+            </li>
+            <li class="linkedin">
+              <a
+                class="link"
+                href="https://linkedin.com/in/vashudevdhama"
+                target="_blank"
+                >&#9758; LinkedIn</a
+              >
+            </li>
+          </ul>
+          <!-- contact -->
+          <a class="contact link" href="mailto:dhamavashudev@gmail.com"
+            >Get in Touch!</a
+          >
         </div>
-        <!-- education -->
-        <!-- projects -->
-        <div class="projects">
-          <div class="project-head">
-            <h2 style="color: #5ef5da;">Projects:</h2>
-          </div>
-          <!-- tiles -->
-          <div class="tiles">
-            <!-- tile -->
-            <div class="tile">
-              <div class="project-name"><h3>Weather App</h3></div>
-              <div class="project-desc">
-                A weather app able to find out the live weather data in the
-                current location of the device as well as the weather for any
-                city you can think of!
+        <!-- main-left -->
+        <!-- main-right -->
+        <div class="main-right">
+          <!-- education -->
+          <div class="education">
+            <div class="edu-head">
+              <h2 style="color: #5ef5da;">Education:</h2>
+            </div>
+            <!-- tiles -->
+            <div class="tiles">
+              <!-- tile -->
+              <div class="tile">
+                <div class="college"><h2>KIET Group of Institutions</h2></div>
+                <div class="degree"><h4>Bachelor of Technology (IT)</h4></div>
+                <div class="year">Year: 2016-2020</div>
+                <div class="percentage">Percentage: 82%</div>
               </div>
-              <div class="project-skills">
-                <span style="color: #5ef5da;">Skill: </span>Flutter,
-                OpenWeatherMap API
-              </div>
-              <div class="project-link">
-                <a
-                  class="link"
-                  href="https://github.com/vashudevdhama/weather_app_flutter#climate_flutter-"
-                  class="github-link"
-                  >Visit</a
-                >
+              <!-- tile -->
+              <div class="tile">
+                <div class="college"><h2>Vanasthali Public School</h2></div>
+                <div class="degree">
+                  <h4>Central Board of Secondary Education</h4>
+                </div>
+                <div class="year">Year of passing: 2015</div>
+                <div class="percentage">Percentage: 82.2%</div>
               </div>
             </div>
-            <!-- tile -->
-            <div class="tile">
-              <div class="project-name"><h3>Jet Fighting Game</h3></div>
-              <div class="project-desc">
-                A jet-plane fighting 3D game for windows pc. The concept was to
-                just play around enemy's planes and shoot them.
+            <!-- tiles -->
+          </div>
+          <!-- education -->
+          <!-- projects -->
+          <div class="projects">
+            <div class="project-head">
+              <h2 style="color: #5ef5da;">Projects:</h2>
+            </div>
+            <!-- tiles -->
+            <div class="tiles">
+              <!-- tile -->
+              <div class="tile">
+                <div class="project-name"><h3>Weather App</h3></div>
+                <div class="project-desc">
+                  A weather app able to find out the live weather data in the
+                  current location of the device as well as the weather for any
+                  city you can think of!
+                </div>
+                <div class="project-skills">
+                  <span style="color: #5ef5da;">Skill: </span>Flutter,
+                  OpenWeatherMap API
+                </div>
+                <div class="project-link">
+                  <a
+                    class="link"
+                    href="https://github.com/vashudevdhama/weather_app_flutter#climate_flutter-"
+                    class="github-link"
+                    target="_blank"
+                    >Visit</a
+                  >
+                </div>
               </div>
-              <div class="project-skills">
-                <span style="color: #5ef5da;">Skill: </span>Unity3D, Blender
-              </div>
-              <div class="project-link">
-                <a
-                  class="link"
-                  href="https://github.com/vashudevdhama/Jet_Fighting#jet_fighting"
-                  class="github-link"
-                  >Visit</a
-                >
+              <!-- tile -->
+              <div class="tile">
+                <div class="project-name"><h3>Jet Fighting Game</h3></div>
+                <div class="project-desc">
+                  A jet-plane fighting 3D game for windows pc. The concept was
+                  to just play around enemy's planes and shoot them.
+                </div>
+                <div class="project-skills">
+                  <span style="color: #5ef5da;">Skill: </span>Unity3D, Blender
+                </div>
+                <div class="project-link">
+                  <a
+                    class="link"
+                    href="https://github.com/vashudevdhama/Jet_Fighting#jet_fighting"
+                    class="github-link"
+                    target="_blank"
+                    >Visit</a
+                  >
+                </div>
               </div>
             </div>
+            <!-- tiles -->
           </div>
-          <!-- tiles -->
-        </div>
-        <!-- projects -->
-        <!-- extra-suggestion -->
-        <div class="extra-suggestion">
-          <div class="suggest-head">
-            <h2 style="color: #5ef5da;">Changes I believe in:</h2>
+          <!-- projects -->
+          <!-- extra-suggestion -->
+          <div class="extra-suggestion">
+            <div class="suggest-head">
+              <h2 style="color: #5ef5da;">Changes I believe in:</h2>
+            </div>
+            <!-- extra-suggestion-desc -->
+            <div class="extra-suggestion-desc">
+              <p>
+                Be responsible and take collective actions to the horizon.
+                <br />
+                Strike a new deal for the nature.
+              </p>
+            </div>
+            <!-- extra-suggestion-desc -->
           </div>
-          <!-- extra-suggestion-desc -->
-          <div class="extra-suggestion-desc">
-            <p>
-              Be responsible and take collective actions to the horizon.
-              <br />
-              Strike a new deal for the nature.
-            </p>
-          </div>
-          <!-- extra-suggestion-desc -->
-        </div>
 
-        <!-- extra-suggestion -->
-      </div>
-      <!-- main-right -->
-    </main>
-    <!-- Main body -->
+          <!-- extra-suggestion -->
+        </div>
+        <!-- main-right -->
+      </main>
+      <!-- Main body -->
+    </div>
   </body>
 </html>

@@ -64,6 +64,9 @@ a.contact {
   display: grid;
   grid-row-gap: 0.5em;
 }
+.tile:hover {
+  background-color: #040e1f;
+}
 .college h3 {
   margin: 0;
 }
@@ -79,11 +82,14 @@ a.contact {
 .extra-suggestion {
   margin: 5px;
 }
-.extra-suggestion-desc {
+.extra-suggestion-desc p {
   border: solid 1px #5ef5da;
   border-radius: 5px;
   padding: 5px;
   padding-bottom: 0;
+}
+.extra-suggestion-desc:hover {
+  background-color: #040e1f;
 }
 .github-link {
   border: solid 1px;
@@ -112,6 +118,9 @@ li {
   text-decoration: none;
   color: #5ef5da;
 }
+.link:hover {
+  background-color: #728884;
+}
 .degree h4 {
   margin-top: 7px;
 }
@@ -120,4 +129,30 @@ p {
 }
 .project-desc {
   font-size: 22px;
+}
+#main {
+  display: none;
+}
+#clickme {
+  display: block;
+  height: 500px;
+  position: relative;
+}
+.center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.center button {
+  font-size: 26px;
+  padding: 10px;
+  border: solid 1px #5ef5da;
+  color: #5ef5da;
+  background-color: #0a192f;
+}
+.center button:hover {
+  background-color: #a0b8b3;
 }
