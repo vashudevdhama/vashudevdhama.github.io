@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- *Post layout-->
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>
+      Jekyll Setup on Debian or Ubuntu
+    </title>
+    <meta
+      name="description"
+      content="Vashudev Dhama is a software developer, specializing in building (and occasionally designing) static websites, cross-platform mobile applications and everything in between."
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/assets/css/main.css">
+  </head>
+  <body>
+    <div class="container">
+  <div id="navbar">
+    <a href="/index.html">Home</a>
+    <a href="/index.html/#about">About</a>
+    <a href="/blog.html">Blogs</a>
+    <a href="/index.html/#getInTouch">Contact</a>
+  </div>
+</div>
+<script type="text/javascript">
+  var prevScrollpos = window.pageYOffset;
+  window.onscroll = function () {
+    var currentScrollpos = window.pageYOffset;
+    if (prevScrollpos > currentScrollpos) {
+      document.getElementById("navbar").style.top = "0";
+    } else {
+      document.getElementById("navbar").style.top = "-100px";
+    }
+
+    prevScrollpos = currentScrollpos;
+  };
+</script>
+
+
+    <div class="postContainer">
+      <h1>Jekyll Setup on Debian or Ubuntu</h1>
+      <p>01 Jun 2020 - Vashudev Dhama</p>
+      <i class="fa fa-tags" style="color: #86c232;"></i>
+      
+      <div class="tags">Jekyll</div>
+      
+      <div class="tags">Static-site-generator</div>
+      
+      <hr />
+      <p>This post will take you through the complete step-by-step procedure of installing and making Jekyll static site builder functional on your machine.</p>
+
+<h2 id="1-installation-process">1. Installation process:</h2>
+
+<h4 id="ruby-development-environment">Ruby Development Environment:</h4>
+
+<p>Jekyll require Ruby version 2.5.0 or above, including all development headers.
+Check ruby version:</p>
+
+<ul>
+  <li>Open your terminal ( CTRL + ALT + T).</li>
+  <li>
+    <p>Check for Ruby environment using the command <code>ruby -v</code> in your terminal.
+If the command doesn’t output the required version of Ruby 2.5.0 or above, then do the following:</p>
+
+    <ul>
+      <li>Run the following command in your terminal:
+        <pre><code>
+sudo apt-get install ruby-full
+</code></pre>
+      </li>
+      <li>
+        <p>Now run the following commands in your terminal:</p>
+
+        <pre><code>
+ruby -v
+gem -v
+</code></pre>
+
+        <p>They both should return appropriate versions available on the system.</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>Make sure that “GCC” and “Make” are installed on your system ( check by running <code>gcc -v</code>, <code>g++ -v</code> and <code>make -v</code> in your terminal). If not, head over to their official website for installation instructions: <a href="https://gcc.gnu.org/install/" class="inpostLink">GCC</a> and <a href="https://www.gnu.org/software/make/" class="inpostLink">Make</a></p>
+
+<p>Install all the required dependencies before we install Jekyll by running the following command in your terminal:</p>
+
+<pre><code>
+sudo apt-get install ruby-full build-essential zlib1g-dev
+</code></pre>
+
+<p>It’s a good practice to create a gem installation directory for your user account. Run the following commands in your terminal. These will add environment variables to your <code>~/.bashrc</code>.</p>
+
+<pre><code>
+echo '# Install Ruby Gems to ~/gems' &gt;&gt; ~/.bashrc
+echo 'export GEM_HOME="$HOME/gems"' &gt;&gt; ~/.bashrc
+echo 'export PATH="$HOME/gems/bin:$PATH"' &gt;&gt; ~/.bashrc
+source ~/.bashrc
+</code></pre>
+
+<p>Finally install Jekyll:</p>
+
+<pre><code>
+gem install jekyll bundler.
+</code></pre>
+
+<p>That’s all, you are good to go to start using Jekyll.</p>
+
+<h2 id="2-check-jekyll-for-a-test-site">2. Check Jekyll for a test site.</h2>
+
+<ul>
+  <li>
+    <p>Open your terminal and change the directory to a suitable path where you want to initialize and store your Jekyll project. (We’ll use “testSite” as our root directory for project).</p>
+  </li>
+  <li>
+    <p>Run the following command to initialize a new Jekyll site:</p>
+  </li>
+</ul>
+<pre><code>
+jekyll new testSite
+</code></pre>
+<ul>
+  <li>Change into the new directory:</li>
+</ul>
+<pre><code>
+cd testSite
+</code></pre>
+<ul>
+  <li>Now run the following command to build and host the site on local server:</li>
+</ul>
+<pre><code>
+bundle exec jekyll serve
+</code></pre>
+<ul>
+  <li>
+    <p>Browse to <a href="http://127.0.0.1:4000/" class="inpostLink" target="_blank" rel="noreferrer noopener">localhost:4000</a> in your browser.
+There you go, you should see the default Welcome to Jekyll page.
+<strong>Note:</strong> You can stop the server by pressing CTRL + C in your terminal window which is showing server running.
+So now you have:</p>
+  </li>
+  <li>Installed the Jekyll and related development environment on your system.</li>
+  <li>Built and hosted the default page on your local server.
+That’s all for this post, keep an eye for more such posts.</li>
+</ul>
+
+    </div>
+
+    <footer class="footer">
+      <div class="header-icons">
+        <a aria-label="Send email" href="mailto:dhamavashudev@gmail.com"
+          ><i class="icon fa fa-envelope"></i
+        ></a>
+        <a
+          aria-label="My Twitter"
+          target="_blank"
+          rel="noreferrer noopener"
+          href="https://twitter.com/vashudevdhama"
+          ><i class="icon fa fa-twitter" aria-hidden="true"></i
+        ></a>
+        <a
+          aria-label="My LinkedIn"
+          target="_blank"
+          rel="noreferrer noopener"
+          href="https://linkedin.com/in/vashudevdhama"
+          ><i class="icon fa fa-linkedin" aria-hidden="true"></i
+        ></a>
+        <a
+          aria-label="My Github"
+          target="_blank"
+          rel="noreferrer noopener"
+          href="https://github.com/vashudevdhama"
+          ><i class="icon fa fa-github" aria-hidden="true"></i
+        ></a>
+      </div>
+      <p style="margin-bottom: 0px;">Build with Jekyll by Vashudev Dhama</p>
+      <a href="mailto:dhamavashudev@gmail.com">dhamavashudev@gmail.com</a>
+    </footer>
+    <!-- Google Analytics -->
+
+<script>
+var dnt = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+if (dnt != "1" && dnt != "yes") {
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', '', 'auto');
+ga('send', 'pageview');
+}
+</script>
+
+
+  </body>
+</html>

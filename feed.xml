@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.1.0">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2020-07-21T23:44:40+05:30</updated><id>/feed.xml</id><title type="html">Vashudev Dhama | Software Developer</title><subtitle>Vashudev Dhama is a software developer, specializing in building (and occasionally designing) static websites, cross-platform mobile applications and everything in between.</subtitle><entry><title type="html">Learn how to generate static sites with Jekyll Part 2</title><link href="/coding/design/2020/06/05/Learn-how-to-generate-static-sites-with-Jekyll-Part-2.html" rel="alternate" type="text/html" title="Learn how to generate static sites with Jekyll Part 2" /><published>2020-06-05T10:18:59+05:30</published><updated>2020-06-05T10:18:59+05:30</updated><id>/coding/design/2020/06/05/Learn-how-to-generate-static-sites-with-Jekyll-Part-2</id><content type="html" xml:base="/coding/design/2020/06/05/Learn-how-to-generate-static-sites-with-Jekyll-Part-2.html">&lt;p&gt;Hi there! Welcome Back. In this tutorial, we’ll cover the basics of Jekyll Layouts and Includes.&lt;/p&gt;
+
+&lt;p&gt;In “Learn how to generate static sites with Jekyll Part 1”, we’ve covered Jekyll Setup, Liquid template and Front matter. If you have not read, I would strongly suggest you to read the Part-1 post before proceeding further.&lt;/p&gt;
+
+&lt;h2 id=&quot;1-layouts&quot;&gt;1. Layouts&lt;/h2&gt;
+
+&lt;p&gt;Layout is a better choice for multi-page websites. We create layouts in a directory names &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_layouts&lt;/code&gt; under root directory.
+Let’s create our first layout &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_layouts/default.html&lt;/code&gt; and write in the following content:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&amp;lt;!doctype html&amp;gt;
+&amp;lt;html&amp;gt;
+  &amp;lt;head&amp;gt;
+    &amp;lt;meta charset=&quot;utf-8&quot;&amp;gt;
+    &amp;lt;title&amp;gt;{{ page.title }}&amp;lt;/title&amp;gt;
+  &amp;lt;/head&amp;gt;
+  &amp;lt;body&amp;gt;
+    {{ content }}
+  &amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;You will notice that this file looks similar to our previous index.html file created in Part-1, except that there’s no front matter and there’s only &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;content&lt;/code&gt; variable inside the body tag.
+Note: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;content&lt;/code&gt; is a special variable used to access the value of rendered content of the page it’s called on.&lt;/p&gt;
+
+&lt;p&gt;Now, to make use of this layout in our index.html, we can set a layout variable as front matter and our index.html file will look like this:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+---
+layout: default
+title: Home
+greet: Jekyll
+---
+
+&amp;lt;h1&amp;gt;Hello {{ page.greet }}&amp;lt;/h1&amp;gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Note that we can access the page front matter from the layout (title variable is set in the index.html but is output in layout.
+Now save all changes, and start the jekyll serve. On &lt;a href=&quot;http://127.0.0.1:4000/&quot; class=&quot;inpostLink&quot; target=&quot;_blank&quot; rel=&quot;noreferrer noopener&quot;&gt;localhost:4000&lt;/a&gt;, you’ll see that the site renders everything like before.
+Let’s create another page using the same &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_layouts/default.html&lt;/code&gt; layout.
+We’ll create about.md page to show our introduction. The &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;root/about.md&lt;/code&gt; file looks like this:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;---
+layout: default
+title: About
+---
+# About page
+
+This page tells you a little bit about me.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Run jekyll serve (if not already running), head over to &lt;a href=&quot;http://127.0.0.1:4000/about.html&quot; class=&quot;inpostLink&quot; target=&quot;_blank&quot; rel=&quot;noreferrer noopener&quot;&gt;localhost:4000/about.html&lt;/a&gt;.
+Cool! There is our about page just using about.md file(as we have already set our default layout).&lt;/p&gt;
+
+&lt;h2 id=&quot;2-includes&quot;&gt;2. Includes&lt;/h2&gt;
+
+&lt;p&gt;The include tag is used to include content from another file stored in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;root/_include&lt;/code&gt; folder. It is useful for having a single source code that repeats around the site. Syntax for includes is like: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;{% include filename.html %}&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Let’s take the example of navigation. Since navigation should be on every page, let’s create it using the concept of includes.&lt;/p&gt;
+
+&lt;p&gt;Create a file for navigation at &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_includes/navigation.html&lt;/code&gt; having the below content:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;nav&amp;gt;
+  &amp;lt;a href=&quot;/&quot;&amp;gt;Home&amp;lt;/a&amp;gt;
+  &amp;lt;a href=&quot;/about.html&quot;&amp;gt;About&amp;lt;/a&amp;gt;
+&amp;lt;/nav&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now, we need to modify &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_layouts/default.html&lt;/code&gt; to add the navigation:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+&amp;lt;!doctype html&amp;gt;
+&amp;lt;html&amp;gt;
+  &amp;lt;head&amp;gt;
+    &amp;lt;meta charset=&quot;utf-8&quot;&amp;gt;
+    &amp;lt;title&amp;gt;{{ page.title }}&amp;lt;/title&amp;gt;
+  &amp;lt;/head&amp;gt;
+  &amp;lt;body&amp;gt;
+    {% include navigation.html %}
+    {{ content }}
+  &amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Open the &lt;a href=&quot;http://127.0.0.1:4000/&quot; class=&quot;inpostLink&quot; target=&quot;_blank&quot; rel=&quot;noreferrer noopener&quot;&gt;localhost:4000&lt;/a&gt; in your browser, you’ll see a basic navigation. Try to switch between pages.&lt;/p&gt;
+
+&lt;p&gt;That’s all for this post. We’ve learnt pretty important stuff about basics of Layouts and Includes. Keep an eye for Part-3 till then go on and try various layout and includes stuff to make the concept clear.&lt;/p&gt;</content><author><name>Vashudev Dhama</name></author><category term="Jekyll" /><category term="Static-site-generator" /><summary type="html">Hi there! Welcome Back. In this tutorial, we’ll cover the basics of Jekyll Layouts and Includes.</summary></entry><entry><title type="html">Learn how to generate static sites with Jekyll Part 1</title><link href="/coding/design/2020/06/03/Learn-how-to-generate-static-sites-with-Jekyll-Part-1.html" rel="alternate" type="text/html" title="Learn how to generate static sites with Jekyll Part 1" /><published>2020-06-03T21:18:59+05:30</published><updated>2020-06-03T21:18:59+05:30</updated><id>/coding/design/2020/06/03/Learn-how-to-generate-static-sites-with-Jekyll-Part-1</id><content type="html" xml:base="/coding/design/2020/06/03/Learn-how-to-generate-static-sites-with-Jekyll-Part-1.html">&lt;p&gt;In this tutorial series, you’ll learn how to build your first Jekyll site from scratch. Note: It would be nice to have fundamental HTML and CSS knowledge to gain the most from the tutorials.&lt;/p&gt;
+
+&lt;p&gt;Jekyll is a static site generator suitable for Blog and Portfolio static websites. It creates static websites from markup files using layouts.&lt;/p&gt;
+
+&lt;p&gt;Let’s get into the Jekyll world!&lt;/p&gt;
+
+&lt;h2 id=&quot;setup&quot;&gt;Setup&lt;/h2&gt;
+
+&lt;h4 id=&quot;1-installation&quot;&gt;1. Installation&lt;/h4&gt;
+
+&lt;p&gt;Jekyll need Ruby on your machine to run. Head over the &lt;Jekyll Setup=&quot;&quot; on=&quot;&quot; Debian=&quot;&quot; or=&quot;&quot; Ubuntu=&quot;&quot;&gt; post and follow the instructions. Note: To explore more on installation, visit https://jekyllrb.com/docs/installation/&lt;/Jekyll&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;2-setup&quot;&gt;2. Setup&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Open your terminal and change the directory to a suitable path where you want to initialize and store your Jekyll project.&lt;/li&gt;
+  &lt;li&gt;Run the follwing command to initialize the Jekyll project folder.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;jekyll new root
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Here “root” is the parent directory name for my Jekyll project. You can use any name you want, but for this post we’ll use root only.&lt;/p&gt;
+
+&lt;h4 id=&quot;3-create-home-page&quot;&gt;3. Create home page&lt;/h4&gt;
+
+&lt;p&gt;It’s time to say Hello Jekyll!&lt;/p&gt;
+
+&lt;p&gt;Let’s add our first file &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;index.html&lt;/code&gt; in the root directory with the following content:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &amp;lt;!doctype html&amp;gt;
+  &amp;lt;html&amp;gt;
+    &amp;lt;head&amp;gt;
+      &amp;lt;meta charset=&quot;utf-8&quot;&amp;gt;
+      &amp;lt;title&amp;gt;Home&amp;lt;/title&amp;gt;
+    &amp;lt;/head&amp;gt;
+    &amp;lt;body&amp;gt;
+     	&amp;lt;h1&amp;gt;Hello Jekyll!&amp;lt;/h1&amp;gt;
+    &amp;lt;/body&amp;gt;
+  &amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;3-build-the-site&quot;&gt;3. Build the site&lt;/h4&gt;
+
+&lt;p&gt;We need to build the site before we can view it. Now, we have two options to build the site: one is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll build&lt;/code&gt; and the other is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;.
+During website development, use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt; which will run your website on local server at &lt;a href=&quot;http://127.0.0.1:4000/&quot; class=&quot;inpostLink&quot; target=&quot;_blank&quot; rel=&quot;noreferrer noopener&quot;&gt;localhost:4000&lt;/a&gt;. For production build, we use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll build&lt;/code&gt;.
+So, for now, run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt; in the root directory of your site to build it and serve it on local serve. Now move to &lt;a href=&quot;http://127.0.0.1:4000/&quot; class=&quot;inpostLink&quot; target=&quot;_blank&quot; rel=&quot;noreferrer noopener&quot;&gt;localhost:4000&lt;/a&gt; in your browser. Tadaa!! Hello Jekyll.&lt;/p&gt;
+
+&lt;h2 id=&quot;liquid-template-language&quot;&gt;Liquid Template Language&lt;/h2&gt;
+
+&lt;p&gt;Role of Jekyll starts to get intereting from here. Actually, Liquid is a template language which has three main parts:&lt;/p&gt;
+
+&lt;h4 id=&quot;1-objects&quot;&gt;1. Objects:&lt;/h4&gt;
+
+&lt;p&gt;Objects, denoted by double curly braces &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;{{ and }}&lt;/code&gt;, shows Liquid where to output content.
+Example:
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;{{ page.title }}&lt;/code&gt;
+This would output &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;page.title&lt;/code&gt; variable on the page.&lt;/p&gt;
+
+&lt;h4 id=&quot;2-tags&quot;&gt;2. Tags:&lt;/h4&gt;
+
+&lt;p&gt;Tags, denoted by curly braces and percent signs &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;{% and %}&lt;/code&gt;, are used for logic and control flow for templates.
+Example:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{% if page.showContent %}
+  &amp;lt;div class = “content”&amp;gt;
+    Content
+  &amp;lt;/div&amp;gt;
+{% endif %}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;This will show the content only if &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;page.showContent&lt;/code&gt; is true.&lt;/p&gt;
+
+&lt;h4 id=&quot;3-filters&quot;&gt;3. Filters:&lt;/h4&gt;
+
+&lt;p&gt;Modify the output of Liquid object with filters.
+Example:&lt;/p&gt;
+
+&lt;p&gt;{{ “first initial made capitalize” | capitalize }}
+By, adding Filter “capitalize”, this would output as “First initial made capitalize”.
+Note: Observe that filter is separated by a vertical bar &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;|&lt;/code&gt; within an output.
+Now, to use Liquid in our root/index.html file,
+let’s add the following code in body of our index.html file.&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;h1&amp;gt;{{ “Hello Jekyll!” | smartify }}&amp;lt;/h1&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; If you refresh your web page in the browser, you will see the content the same as in the code. So for Liquid template to work, we need to add front matter so that Jekyll would be able to process Liquid.&lt;/p&gt;
+
+&lt;h2 id=&quot;front-matter&quot;&gt;Front Matter&lt;/h2&gt;
+
+&lt;p&gt;Front matter is a snippet of YAML(YAML is a human friendly data serialization standard for all programming languages), used to set variables for the page and written between two triple-dashed lines at the top of a file like this:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;---
+name: Jekyll
+---
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;We can access front matter variables under the page variable like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;{{ page.name }}&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Now let’s include front matter and change the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;title&amp;gt;&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&amp;lt;body&amp;gt;&lt;/code&gt; in index.html using front matter like this:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;---
+title: Home
+greet: Jekyll
+---
+
+&amp;lt;!doctype html&amp;gt;
+&amp;lt;html&amp;gt;
+  &amp;lt;head&amp;gt;
+    &amp;lt;meta charset=&quot;utf-8&quot;&amp;gt;
+    &amp;lt;title&amp;gt;Learn how to generate static sites with Jekyll Part 1&amp;lt;/title&amp;gt;
+  &amp;lt;/head&amp;gt;
+  &amp;lt;body&amp;gt;
+    &amp;lt;h1&amp;gt; Hello &amp;lt;/h1&amp;gt;
+  &amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt; (if not currently serving) and head over the browser’s local host page &lt;a href=&quot;http://127.0.0.1:4000/&quot; class=&quot;inpostLink&quot; target=&quot;_blank&quot; rel=&quot;noreferrer noopener&quot;&gt;localhost:4000&lt;/a&gt;
+There you go! We have setup the Jekyll engine, built our site with working Liquid templating using the front matter.&lt;/p&gt;
+
+&lt;p&gt;That’s all for the post. Stay tuned for Part-2 and keep exploring.&lt;/p&gt;</content><author><name>Vashudev Dhama</name></author><category term="Jekyll" /><category term="Static-site-generator" /><summary type="html">In this tutorial series, you’ll learn how to build your first Jekyll site from scratch. Note: It would be nice to have fundamental HTML and CSS knowledge to gain the most from the tutorials.</summary></entry><entry><title type="html">Jekyll Setup on Debian or Ubuntu</title><link href="/coding/design/2020/06/01/Jekyll-Installation-On-Debian-or-Ubuntu.html" rel="alternate" type="text/html" title="Jekyll Setup on Debian or Ubuntu" /><published>2020-06-01T22:18:59+05:30</published><updated>2020-06-01T22:18:59+05:30</updated><id>/coding/design/2020/06/01/Jekyll-Installation-On-Debian-or-Ubuntu</id><content type="html" xml:base="/coding/design/2020/06/01/Jekyll-Installation-On-Debian-or-Ubuntu.html">&lt;p&gt;This post will take you through the complete step-by-step procedure of installing and making Jekyll static site builder functional on your machine.&lt;/p&gt;
+
+&lt;h2 id=&quot;1-installation-process&quot;&gt;1. Installation process:&lt;/h2&gt;
+
+&lt;h4 id=&quot;ruby-development-environment&quot;&gt;Ruby Development Environment:&lt;/h4&gt;
+
+&lt;p&gt;Jekyll require Ruby version 2.5.0 or above, including all development headers.
+Check ruby version:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Open your terminal ( CTRL + ALT + T).&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Check for Ruby environment using the command &lt;code&gt;ruby -v&lt;/code&gt; in your terminal.
+If the command doesn’t output the required version of Ruby 2.5.0 or above, then do the following:&lt;/p&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;Run the following command in your terminal:
+        &lt;pre&gt;&lt;code&gt;
+sudo apt-get install ruby-full
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;Now run the following commands in your terminal:&lt;/p&gt;
+
+        &lt;pre&gt;&lt;code&gt;
+ruby -v
+gem -v
+&lt;/code&gt;&lt;/pre&gt;
+
+        &lt;p&gt;They both should return appropriate versions available on the system.&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Make sure that “GCC” and “Make” are installed on your system ( check by running &lt;code&gt;gcc -v&lt;/code&gt;, &lt;code&gt;g++ -v&lt;/code&gt; and &lt;code&gt;make -v&lt;/code&gt; in your terminal). If not, head over to their official website for installation instructions: &lt;a href=&quot;https://gcc.gnu.org/install/&quot; class=&quot;inpostLink&quot;&gt;GCC&lt;/a&gt; and &lt;a href=&quot;https://www.gnu.org/software/make/&quot; class=&quot;inpostLink&quot;&gt;Make&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Install all the required dependencies before we install Jekyll by running the following command in your terminal:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+sudo apt-get install ruby-full build-essential zlib1g-dev
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It’s a good practice to create a gem installation directory for your user account. Run the following commands in your terminal. These will add environment variables to your &lt;code&gt;~/.bashrc&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+echo '# Install Ruby Gems to ~/gems' &amp;gt;&amp;gt; ~/.bashrc
+echo 'export GEM_HOME=&quot;$HOME/gems&quot;' &amp;gt;&amp;gt; ~/.bashrc
+echo 'export PATH=&quot;$HOME/gems/bin:$PATH&quot;' &amp;gt;&amp;gt; ~/.bashrc
+source ~/.bashrc
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Finally install Jekyll:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+gem install jekyll bundler.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That’s all, you are good to go to start using Jekyll.&lt;/p&gt;
+
+&lt;h2 id=&quot;2-check-jekyll-for-a-test-site&quot;&gt;2. Check Jekyll for a test site.&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Open your terminal and change the directory to a suitable path where you want to initialize and store your Jekyll project. (We’ll use “testSite” as our root directory for project).&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Run the following command to initialize a new Jekyll site:&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+jekyll new testSite
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+  &lt;li&gt;Change into the new directory:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+cd testSite
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+  &lt;li&gt;Now run the following command to build and host the site on local server:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;
+bundle exec jekyll serve
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Browse to &lt;a href=&quot;http://127.0.0.1:4000/&quot; class=&quot;inpostLink&quot; target=&quot;_blank&quot; rel=&quot;noreferrer noopener&quot;&gt;localhost:4000&lt;/a&gt; in your browser.
+There you go, you should see the default Welcome to Jekyll page.
+&lt;strong&gt;Note:&lt;/strong&gt; You can stop the server by pressing CTRL + C in your terminal window which is showing server running.
+So now you have:&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Installed the Jekyll and related development environment on your system.&lt;/li&gt;
+  &lt;li&gt;Built and hosted the default page on your local server.
+That’s all for this post, keep an eye for more such posts.&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Vashudev Dhama</name></author><category term="Jekyll" /><category term="Static-site-generator" /><summary type="html">This post will take you through the complete step-by-step procedure of installing and making Jekyll static site builder functional on your machine.</summary></entry></feed>

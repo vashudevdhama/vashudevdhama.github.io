@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- *Post layout-->
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>
+      Learn how to generate static sites with Jekyll Part 1
+    </title>
+    <meta
+      name="description"
+      content="Vashudev Dhama is a software developer, specializing in building (and occasionally designing) static websites, cross-platform mobile applications and everything in between."
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/assets/css/main.css">
+  </head>
+  <body>
+    <div class="container">
+  <div id="navbar">
+    <a href="/index.html">Home</a>
+    <a href="/index.html/#about">About</a>
+    <a href="/blog.html">Blogs</a>
+    <a href="/index.html/#getInTouch">Contact</a>
+  </div>
+</div>
+<script type="text/javascript">
+  var prevScrollpos = window.pageYOffset;
+  window.onscroll = function () {
+    var currentScrollpos = window.pageYOffset;
+    if (prevScrollpos > currentScrollpos) {
+      document.getElementById("navbar").style.top = "0";
+    } else {
+      document.getElementById("navbar").style.top = "-100px";
+    }
+
+    prevScrollpos = currentScrollpos;
+  };
+</script>
+
+
+    <div class="postContainer">
+      <h1>Learn how to generate static sites with Jekyll Part 1</h1>
+      <p>03 Jun 2020 - Vashudev Dhama</p>
+      <i class="fa fa-tags" style="color: #86c232;"></i>
+      
+      <div class="tags">Jekyll</div>
+      
+      <div class="tags">Static-site-generator</div>
+      
+      <hr />
+      <p>In this tutorial series, you’ll learn how to build your first Jekyll site from scratch. Note: It would be nice to have fundamental HTML and CSS knowledge to gain the most from the tutorials.</p>
+
+<p>Jekyll is a static site generator suitable for Blog and Portfolio static websites. It creates static websites from markup files using layouts.</p>
+
+<p>Let’s get into the Jekyll world!</p>
+
+<h2 id="setup">Setup</h2>
+
+<h4 id="1-installation">1. Installation</h4>
+
+<p>Jekyll need Ruby on your machine to run. Head over the <Jekyll Setup="" on="" Debian="" or="" Ubuntu=""> post and follow the instructions. Note: To explore more on installation, visit https://jekyllrb.com/docs/installation/</Jekyll></p>
+
+<h4 id="2-setup">2. Setup</h4>
+
+<ul>
+  <li>Open your terminal and change the directory to a suitable path where you want to initialize and store your Jekyll project.</li>
+  <li>Run the follwing command to initialize the Jekyll project folder.</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jekyll new root
+</code></pre></div></div>
+
+<p><strong>Note:</strong> Here “root” is the parent directory name for my Jekyll project. You can use any name you want, but for this post we’ll use root only.</p>
+
+<h4 id="3-create-home-page">3. Create home page</h4>
+
+<p>It’s time to say Hello Jekyll!</p>
+
+<p>Let’s add our first file <code class="language-plaintext highlighter-rouge">index.html</code> in the root directory with the following content:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  &lt;!doctype html&gt;
+  &lt;html&gt;
+    &lt;head&gt;
+      &lt;meta charset="utf-8"&gt;
+      &lt;title&gt;Home&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+     	&lt;h1&gt;Hello Jekyll!&lt;/h1&gt;
+    &lt;/body&gt;
+  &lt;/html&gt;
+</code></pre></div></div>
+
+<h4 id="3-build-the-site">3. Build the site</h4>
+
+<p>We need to build the site before we can view it. Now, we have two options to build the site: one is <code class="language-plaintext highlighter-rouge">jekyll build</code> and the other is <code class="language-plaintext highlighter-rouge">jekyll serve</code>.
+During website development, use <code class="language-plaintext highlighter-rouge">jekyll serve</code> which will run your website on local server at <a href="http://127.0.0.1:4000/" class="inpostLink" target="_blank" rel="noreferrer noopener">localhost:4000</a>. For production build, we use <code class="language-plaintext highlighter-rouge">jekyll build</code>.
+So, for now, run <code class="language-plaintext highlighter-rouge">jekyll serve</code> in the root directory of your site to build it and serve it on local serve. Now move to <a href="http://127.0.0.1:4000/" class="inpostLink" target="_blank" rel="noreferrer noopener">localhost:4000</a> in your browser. Tadaa!! Hello Jekyll.</p>
+
+<h2 id="liquid-template-language">Liquid Template Language</h2>
+
+<p>Role of Jekyll starts to get intereting from here. Actually, Liquid is a template language which has three main parts:</p>
+
+<h4 id="1-objects">1. Objects:</h4>
+
+<p>Objects, denoted by double curly braces <code class="language-plaintext highlighter-rouge">{{ and }}</code>, shows Liquid where to output content.
+Example:
+<code class="language-plaintext highlighter-rouge">{{ page.title }}</code>
+This would output <code class="language-plaintext highlighter-rouge">page.title</code> variable on the page.</p>
+
+<h4 id="2-tags">2. Tags:</h4>
+
+<p>Tags, denoted by curly braces and percent signs <code class="language-plaintext highlighter-rouge">{% and %}</code>, are used for logic and control flow for templates.
+Example:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% if page.showContent %}
+  &lt;div class = “content”&gt;
+    Content
+  &lt;/div&gt;
+{% endif %}
+</code></pre></div></div>
+
+<p>This will show the content only if <code class="language-plaintext highlighter-rouge">page.showContent</code> is true.</p>
+
+<h4 id="3-filters">3. Filters:</h4>
+
+<p>Modify the output of Liquid object with filters.
+Example:</p>
+
+<p>{{ “first initial made capitalize” | capitalize }}
+By, adding Filter “capitalize”, this would output as “First initial made capitalize”.
+Note: Observe that filter is separated by a vertical bar <code class="language-plaintext highlighter-rouge">|</code> within an output.
+Now, to use Liquid in our root/index.html file,
+let’s add the following code in body of our index.html file.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;h1&gt;{{ “Hello Jekyll!” | smartify }}&lt;/h1&gt;
+</code></pre></div></div>
+
+<p><strong>Note:</strong> If you refresh your web page in the browser, you will see the content the same as in the code. So for Liquid template to work, we need to add front matter so that Jekyll would be able to process Liquid.</p>
+
+<h2 id="front-matter">Front Matter</h2>
+
+<p>Front matter is a snippet of YAML(YAML is a human friendly data serialization standard for all programming languages), used to set variables for the page and written between two triple-dashed lines at the top of a file like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---
+name: Jekyll
+---
+</code></pre></div></div>
+
+<p>We can access front matter variables under the page variable like this:</p>
+
+<p><code class="language-plaintext highlighter-rouge">{{ page.name }}</code></p>
+
+<p>Now let’s include front matter and change the <code class="language-plaintext highlighter-rouge">&lt;title&gt;</code> and <code class="language-plaintext highlighter-rouge">&lt;body&gt;</code> in index.html using front matter like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---
+title: Home
+greet: Jekyll
+---
+
+&lt;!doctype html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;Learn how to generate static sites with Jekyll Part 1&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt; Hello &lt;/h1&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div></div>
+
+<p>Run <code class="language-plaintext highlighter-rouge">jekyll serve</code> (if not currently serving) and head over the browser’s local host page <a href="http://127.0.0.1:4000/" class="inpostLink" target="_blank" rel="noreferrer noopener">localhost:4000</a>
+There you go! We have setup the Jekyll engine, built our site with working Liquid templating using the front matter.</p>
+
+<p>That’s all for the post. Stay tuned for Part-2 and keep exploring.</p>
+
+    </div>
+
+    <footer class="footer">
+      <div class="header-icons">
+        <a aria-label="Send email" href="mailto:dhamavashudev@gmail.com"
+          ><i class="icon fa fa-envelope"></i
+        ></a>
+        <a
+          aria-label="My Twitter"
+          target="_blank"
+          rel="noreferrer noopener"
+          href="https://twitter.com/vashudevdhama"
+          ><i class="icon fa fa-twitter" aria-hidden="true"></i
+        ></a>
+        <a
+          aria-label="My LinkedIn"
+          target="_blank"
+          rel="noreferrer noopener"
+          href="https://linkedin.com/in/vashudevdhama"
+          ><i class="icon fa fa-linkedin" aria-hidden="true"></i
+        ></a>
+        <a
+          aria-label="My Github"
+          target="_blank"
+          rel="noreferrer noopener"
+          href="https://github.com/vashudevdhama"
+          ><i class="icon fa fa-github" aria-hidden="true"></i
+        ></a>
+      </div>
+      <p style="margin-bottom: 0px;">Build with Jekyll by Vashudev Dhama</p>
+      <a href="mailto:dhamavashudev@gmail.com">dhamavashudev@gmail.com</a>
+    </footer>
+    <!-- Google Analytics -->
+
+<script>
+var dnt = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+if (dnt != "1" && dnt != "yes") {
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', '', 'auto');
+ga('send', 'pageview');
+}
+</script>
+
+
+  </body>
+</html>
