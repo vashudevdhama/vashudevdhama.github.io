@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- *Post layout-->
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>
+      Learn how to generate static sites with Jekyll Part 2
+    </title>
+    <meta
+      name="description"
+      content="Vashudev Dhama is a software developer, specializing in building (and occasionally designing) static websites, cross-platform mobile applications and everything in between."
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/assets/css/main.css">
+  </head>
+  <body>
+    <div class="container">
+  <div id="navbar">
+    <a href="/index.html">Home</a>
+    <a href="/index.html#about">About</a>
+    <a href="/blog.html">Blogs</a>
+    <a href="/index.html#getInTouch">Contact</a>
+  </div>
+</div>
+<script type="text/javascript">
+  var prevScrollpos = window.pageYOffset;
+  window.onscroll = function () {
+    var currentScrollpos = window.pageYOffset;
+    if (prevScrollpos > currentScrollpos) {
+      document.getElementById("navbar").style.top = "0";
+    } else {
+      document.getElementById("navbar").style.top = "-100px";
+    }
+
+    prevScrollpos = currentScrollpos;
+  };
+</script>
+
+
+    <div class="postContainer">
+      <h1>Learn how to generate static sites with Jekyll Part 2</h1>
+      <p>05 Jun 2020 - Vashudev Dhama</p>
+      <i class="fa fa-tags" style="color: #86c232;"></i>
+      
+      <div class="tags">Jekyll</div>
+      
+      <div class="tags">Static-site-generator</div>
+      
+      <hr />
+      <p>Hi there! Welcome Back. In this tutorial, we’ll cover the basics of Jekyll Layouts and Includes.</p>
+
+<p>In “Learn how to generate static sites with Jekyll Part 1”, we’ve covered Jekyll Setup, Liquid template and Front matter. If you have not read, I would strongly suggest you to read the Part-1 post before proceeding further.</p>
+
+<h2 id="1-layouts">1. Layouts</h2>
+
+<p>Layout is a better choice for multi-page websites. We create layouts in a directory names <code class="language-plaintext highlighter-rouge">_layouts</code> under root directory.
+Let’s create our first layout <code class="language-plaintext highlighter-rouge">_layouts/default.html</code> and write in the following content:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+&lt;!doctype html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;{{ page.title }}&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    {{ content }}
+  &lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre></div></div>
+
+<p>You will notice that this file looks similar to our previous index.html file created in Part-1, except that there’s no front matter and there’s only <code class="language-plaintext highlighter-rouge">content</code> variable inside the body tag.
+Note: <code class="language-plaintext highlighter-rouge">content</code> is a special variable used to access the value of rendered content of the page it’s called on.</p>
+
+<p>Now, to make use of this layout in our index.html, we can set a layout variable as front matter and our index.html file will look like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+---
+layout: default
+title: Home
+greet: Jekyll
+---
+
+&lt;h1&gt;Hello {{ page.greet }}&lt;/h1&gt;
+
+</code></pre></div></div>
+
+<p>Note that we can access the page front matter from the layout (title variable is set in the index.html but is output in layout.
+Now save all changes, and start the jekyll serve. On <a href="http://127.0.0.1:4000/" class="inpostLink" target="_blank" rel="noreferrer noopener">localhost:4000</a>, you’ll see that the site renders everything like before.
+Let’s create another page using the same <code class="language-plaintext highlighter-rouge">_layouts/default.html</code> layout.
+We’ll create about.md page to show our introduction. The <code class="language-plaintext highlighter-rouge">root/about.md</code> file looks like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---
+layout: default
+title: About
+---
+# About page
+
+This page tells you a little bit about me.
+</code></pre></div></div>
+
+<p>Run jekyll serve (if not already running), head over to <a href="http://127.0.0.1:4000/about.html" class="inpostLink" target="_blank" rel="noreferrer noopener">localhost:4000/about.html</a>.
+Cool! There is our about page just using about.md file(as we have already set our default layout).</p>
+
+<h2 id="2-includes">2. Includes</h2>
+
+<p>The include tag is used to include content from another file stored in <code class="language-plaintext highlighter-rouge">root/_include</code> folder. It is useful for having a single source code that repeats around the site. Syntax for includes is like: <code class="language-plaintext highlighter-rouge">{% include filename.html %}</code></p>
+
+<p>Let’s take the example of navigation. Since navigation should be on every page, let’s create it using the concept of includes.</p>
+
+<p>Create a file for navigation at <code class="language-plaintext highlighter-rouge">_includes/navigation.html</code> having the below content:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;nav&gt;
+  &lt;a href="/"&gt;Home&lt;/a&gt;
+  &lt;a href="/about.html"&gt;About&lt;/a&gt;
+&lt;/nav&gt;
+</code></pre></div></div>
+
+<p>Now, we need to modify <code class="language-plaintext highlighter-rouge">_layouts/default.html</code> to add the navigation:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+&lt;!doctype html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;{{ page.title }}&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    {% include navigation.html %}
+    {{ content }}
+  &lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre></div></div>
+
+<p>Open the <a href="http://127.0.0.1:4000/" class="inpostLink" target="_blank" rel="noreferrer noopener">localhost:4000</a> in your browser, you’ll see a basic navigation. Try to switch between pages.</p>
+
+<p>That’s all for this post. We’ve learnt pretty important stuff about basics of Layouts and Includes. Keep an eye for Part-3 till then go on and try various layout and includes stuff to make the concept clear.</p>
+
+    </div>
+
+    <footer class="footer">
+      <div class="header-icons">
+        <a aria-label="Send email" href="mailto:dhamavashudev@gmail.com"
+          ><i class="icon fa fa-envelope"></i
+        ></a>
+        <a
+          aria-label="My Twitter"
+          target="_blank"
+          rel="noreferrer noopener"
+          href="https://twitter.com/vashudevdhama"
+          ><i class="icon fa fa-twitter" aria-hidden="true"></i
+        ></a>
+        <a
+          aria-label="My LinkedIn"
+          target="_blank"
+          rel="noreferrer noopener"
+          href="https://linkedin.com/in/vashudevdhama"
+          ><i class="icon fa fa-linkedin" aria-hidden="true"></i
+        ></a>
+        <a
+          aria-label="My Github"
+          target="_blank"
+          rel="noreferrer noopener"
+          href="https://github.com/vashudevdhama"
+          ><i class="icon fa fa-github" aria-hidden="true"></i
+        ></a>
+      </div>
+      <p style="margin-bottom: 0px;">Build with Jekyll by Vashudev Dhama</p>
+      <a href="mailto:dhamavashudev@gmail.com">dhamavashudev@gmail.com</a>
+    </footer>
+    <!-- Google Analytics -->
+
+<script>
+var dnt = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+if (dnt != "1" && dnt != "yes") {
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create', '', 'auto');
+ga('send', 'pageview');
+}
+</script>
+
+
+  </body>
+</html>

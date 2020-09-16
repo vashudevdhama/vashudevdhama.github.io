@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+<loc>/coding/design/2020/06/01/Jekyll-Installation-On-Debian-or-Ubuntu.html</loc>
+<lastmod>2020-06-01T22:18:59+05:30</lastmod>
+</url>
+<url>
+<loc>/coding/design/2020/06/03/Learn-how-to-generate-static-sites-with-Jekyll-Part-1.html</loc>
+<lastmod>2020-06-03T21:18:59+05:30</lastmod>
+</url>
+<url>
+<loc>/coding/design/2020/06/05/Learn-how-to-generate-static-sites-with-Jekyll-Part-2.html</loc>
+<lastmod>2020-06-05T10:18:59+05:30</lastmod>
+</url>
+<url>
+<loc>/blog.html</loc>
+</url>
+<url>
+<loc>/</loc>
+</url>
+<url>
+<loc>/assets/resume.pdf</loc>
+<lastmod>2020-09-16T09:42:22+05:30</lastmod>
+</url>
+</urlset>
